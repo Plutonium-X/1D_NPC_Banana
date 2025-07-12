@@ -1,0 +1,103 @@
+BACKUP ~Banana/backup~
+AUTHOR ~Noctalys and theacefes (theacefes@gibberlings3.net)~
+README ~Banana/readme-banana.html~
+
+AUTO_TRA ~banana/tra/%s~
+
+LANGUAGE ~English~
+				 ~english~
+				 ~banana/tra/english/Setup-Banana.tra~
+
+LANGUAGE ~Francais~
+				 ~french~
+				 ~banana/tra/french/Setup-Banana.tra~
+				 
+LANGUAGE ~Francais pour les editions EE~
+				 ~frenchEE~
+				 ~banana/tra/frenchEE/Setup-Banana.tra~
+ 
+BEGIN @0
+
+//Adding CRE files
+COPY ~Banana/Banana.cre~ ~override/Banana.cre~
+SAY NAME1 @1
+SAY NAME2 @1
+SAY LEADER @2
+SAY BORED @3
+SAY BATTLE_CRY1 @4
+SAY BATTLE_CRY2 @5
+SAY BATTLE_CRY3 @6
+SAY DAMAGE @7
+SAY DYING @8
+SAY SELECT_COMMON1 @9
+SAY SELECT_COMMON2 @10
+SAY SELECT_COMMON3 @11
+SAY SELECT_COMMON4 @12
+SAY SELECT_COMMON5 @13
+SAY SELECT_COMMON6 @14
+SAY SELECT_ACTION1 @15
+SAY SELECT_ACTION2 @16
+SAY SELECT_ACTION3 @17
+SAY BIO @18
+
+
+// Adds Dialogue Files
+
+COMPILE ~Banana/K#Bana.d~
+COMPILE ~Banana/K#BanaB.d~
+
+// Adds Scripts
+
+EXTEND_BOTTOM ~AR0406.bcs~ ~Banana/AR0406.baf~
+COMPILE ~Banana/K#BANA.baf~
+
+
+// Adds Portraits
+
+ ACTION_IF GAME_IS ~TOB BGT~ THEN BEGIN 
+COPY ~Banana/Portraits~ ~override~
+END
+ACTION_IF GAME_IS ~BG2EE EET~ THEN BEGIN 
+COPY ~Banana/PortraitsEE~ ~override~
+END
+
+// Adds Unnecessary Sounds
+
+COPY ~Banana/audio/K#blank.mus~ ~music~
+COPY_EXISTING ~songlist.2da~ ~override~
+SET_2DA_ENTRY 0 2 3 ~K#BLANK.MUS~
+
+
+ACTION_IF ("%WEIDU_OS%" STRING_COMPARE_CASE ~WIN32~ = 0) THEN BEGIN // if Windows
+COPY ~Banana/audio~ ~override~
+  AT_NOW ~Banana/BatchFiles/bananaaudio.bat~
+  AT_INTERACTIVE_UNINSTALL ~Banana/BatchFiles/bananaaudiouninstall.bat~
+END ELSE BEGIN // if OS X or Linux
+  AT_NOW ~sh Banana/BatchFiles/bananaaudio.sh~
+  AT_UNINSTALL ~sh Banana/BatchFiles/bananaaudiouninstall.sh~
+END
+
+// .2da appending, SoA style
+APPEND ~pdialog.2da~
+~K#Bana K#BanaP K#BanaJ K#BanaD~
+UNLESS ~K#Bana~
+UNLESS ~25POST~
+
+APPEND ~interdia.2da~
+~K#Bana K#BanaB~
+UNLESS ~K#Bana~
+UNLESS ~25FILE~
+
+// .2da appending, ToB style
+APPEND ~pdialog.2da~
+~K#Bana K#BanaP K#BanaJ K#BanaD K#Ban25P K#Ban25J K#Ban25D K#Bana25~
+UNLESS ~K#Bana~
+IF ~25POST~
+
+APPEND ~interdia.2da~
+~K#Bana K#BanaB K#Ban25B~
+UNLESS ~K#Bana~
+IF ~25FILE~
+
+
+

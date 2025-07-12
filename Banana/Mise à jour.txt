@@ -1,0 +1,4 @@
+V2 :
+- Trayification.
+- traduction française.
+- Mise à jour pour BG2EE / EET.

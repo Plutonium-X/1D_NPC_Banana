@@ -1,0 +1,20 @@
+IF
+Global("BananaJoined", "LOCALS", 1)
+Global("BananaLeave","GLOBAL",0)
+THEN
+RESPONSE #100
+SetGlobal("BananaLeave","GLOBAL",1)
+RealSetGlobalTimer("BananaLeaveTimer","GLOBAL",1500)
+END
+
+IF
+RealGlobalTimerExpired("BananaLeaveTimer","GLOBAL")
+InParty("K#Bana")
+InParty(Player1)
+THEN
+RESPONSE #100
+SetGlobal("BananaLeave","GLOBAL", 2)
+GivePartyAllEquipment()
+Interact(Player1)
+END
+
