@@ -1,4 +1,4 @@
-# Banana ! la seule, l'unique banane guerriere/voleuse/mage !
+# Banana ! la seule, l'unique banane guerrière/mage/voleuse !
 
 Elle vous attend près de l'entrée de la Couronne de Cuivre.
 
