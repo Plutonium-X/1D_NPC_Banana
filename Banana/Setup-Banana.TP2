@@ -15,7 +15,11 @@ LANGUAGE ~Francais~
 LANGUAGE ~Francais pour les editions EE~
 				 ~frenchEE~
 				 ~banana/tra/frenchEE/Setup-Banana.tra~
- 
+
+LANGUAGE ~Schinese~
+				 ~schinese~
+				 ~banana/tra/Schinese/Setup-Banana.tra~
+
 BEGIN @0
 
 //Adding CRE files
